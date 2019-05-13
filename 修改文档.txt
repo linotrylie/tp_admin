@@ -1,0 +1,16 @@
+修改文档
+	编辑器  ：上传视频可正常播放         已修改
+
+	节点管理：添加控制器修改pid，level值正常对应
+
+	默认筛选字段： /traits/controller/controller.php  104行
+				原-> $map[$key] = $val;
+				改->if(preg_match('/[\x{4e00}-\x{9fa5}]/u', $val)>0) {
+	                    $map[$key] = ['like','%'.$val.'%'];
+	                }else{
+	                    $map[$key] = $val;
+	                }
+	            理由：含中文字符用like查询，不含汉字用=查询
+
+	密码加密方式：admin/common.php   292行
+				 return hash("md5", 'μ'.trim($password).'θ');
